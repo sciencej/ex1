@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Element Quiz</title>
+  <script>
+    // 원소 데이터 배열
+    var elements = [
+      { symbol: "H", name: "Hydrogen" },
+      { symbol: "He", name: "Helium" },
+      { symbol: "Li", name: "Lithium" },
+      { symbol: "Be", name: "Beryllium" },
+      { symbol: "B", name: "Boron" },
+      { symbol: "C", name: "Carbon" },
+      { symbol: "N", name: "Nitrogen" },
+      { symbol: "O", name: "Oxygen" },
+      { symbol: "F", name: "Fluorine" },
+      { symbol: "Ne", name: "Neon" },
+      { symbol: "Na", name: "Sodium" },
+      { symbol: "Mg", name: "Magnesium" },
+      { symbol: "Al", name: "Aluminum" },
+      { symbol: "Si", name: "Silicon" },
+      { symbol: "P", name: "Phosphorus" },
+      { symbol: "S", name: "Sulfur" },
+      { symbol: "Cl", name: "Chlorine" },
+      { symbol: "K", name: "Potassium" }
+    ];
+
+    // 퀴즈 함수
+    function runQuiz() {
+      var score = 0;
+
+      for (var i = 0; i < elements.length; i++) {
+        var element = elements[i];
+        var answer = prompt("What is the symbol for " + element.name + "?");
+
+        var feedback = document.createElement("p");
+        feedback.textContent = element.name + ": Your answer - " + answer + " | ";
+
+        if (answer === null) {
+          break; // 사용자가 취소 버튼을 누르면 퀴즈 중단
+        }
+
+        if (answer.toUpperCase() === element.symbol) {
+          console.log("Correct!");
+          score++;
+          feedback.textContent += "Correct!";
+          feedback.style.color = "green";
+        } else {
+          console.log("Wrong! The correct answer is " + element.symbol);
+          feedback.textContent += "Wrong! The correct answer is " + element.symbol;
+          feedback.style.color = "red";
+        }
+
+        document.getElementById("quiz-feedback").appendChild(feedback);
+      }
+
+      var resultDiv = document.getElementById("quiz-result");
+      resultDiv.textContent = "Quiz complete. You scored " + score + " out of " + elements.length;
+      resultDiv.style.display = "block";
+    }
+  </script>
+  <style>
+    #quiz-result {
+      display: none;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    #quiz-feedback {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Element Quiz</h1>
+  <button onclick="runQuiz()">Start Quiz</button>
+  <div id="quiz-feedback"></div>
+  <div id="quiz-result"></div>
+</body>
+</html>
